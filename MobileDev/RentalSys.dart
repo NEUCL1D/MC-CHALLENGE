@@ -1,6 +1,4 @@
-//Challenge : Car Rental System (Dart OOP)
-void main() {
-// test of the functionalities 
+// Challenge: Car Rental System (Dart OOP)
 void main() {
   // Create a rental system instance
   RentalSystem RS = RentalSystem();
@@ -39,37 +37,47 @@ void main() {
   RS.displayCars();
 }
 
-}
-
 class Car {
-  String model;
-  bool isAvailable;
-	// the constructor of the class car
+  String _model;
+  bool _isAvailable;
+
+  // the constructor of the class car
   Car(String model) {
-    this.model = model;
-    this.isAvailable = true; // the availability is set to true by default
+    this._model = model;
+    this._isAvailable = true; // the availability is set to true by default
   }
-	// rentCar and returnCar will act somehow as setters for the isAvailable boolean
+
+  // rentCar and returnCar will act somehow as setters for the isAvailable boolean
   void rentCar() {
-    isAvailable = false;
+    _isAvailable = false;
   }
 
   void returnCar() {
-    isAvailable = true;
+    _isAvailable = true;
+  }
+
+  // getter for model 
+  String get model {
+    return _model;
+  }
+
+  //getter for availability 
+  bool get isAvailable {
+    return _isAvailable;
   }
 }
 
 class RentalSystem {
-	// creation of an empty groable list of car
-  List<Car> inventory = [];
+  // creation of an empty groable list of car
+  List<Car> _inventory = []; // Private field
 
   void addCar(String model) {
     var car = Car(model);
-    inventory.add(car);
+    _inventory.add(car);
   }
 
   void rentCar(String model) {
-    for (var car in inventory) {
+    for (var car in _inventory) {
       if (car.model == model && car.isAvailable) {
         car.rentCar();
         print("$model has been rented.");
@@ -80,7 +88,7 @@ class RentalSystem {
   }
 
   void returnCar(String model) {
-    for (var car in inventory) {
+    for (var car in _inventory) {
       if (car.model == model && !car.isAvailable) {
         car.returnCar();
         print("$model has been returned.");
@@ -91,8 +99,8 @@ class RentalSystem {
   }
 
   void displayCars() {
-    for (var car in inventory) {
-	// display of cars using ternary operator
+    for (var car in _inventory) {
+      // display of cars using ternary operator
       print("Model: ${car.model}, Available: ${car.isAvailable ? 'Yes' : 'No'}");
     }
   }
